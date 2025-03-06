@@ -1,0 +1,10 @@
+*.d
+*.o
+*.bin
+*.hex
+*.list
+*.srec
+*.a
+*.elf
+lib/*.ld
+build

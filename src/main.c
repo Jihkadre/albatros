@@ -1,0 +1,16 @@
+#include <libopencm3/stm32/gpio.h>
+#include <libopencm3/stm32/rcc.h>
+
+void delay(void) {
+    for (volatile int i = 0; i < 1000000; i++);
+}
+
+int main(void) {
+    rcc_periph_clock_enable(RCC_GPIOA); 
+    gpio_mode_setup(GPIOA, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO5); 
+
+    for (;;) {
+        gpio_toggle(GPIOA, GPIO5); // LED yak/söndür
+        delay();
+    }
+}
