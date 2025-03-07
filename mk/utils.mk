@@ -8,9 +8,8 @@ UNAME = $(shell uname)
 ifeq ($(UNAME), Linux)
 	NPROCS = $(shell grep -c 'processor' /proc/cpuinfo)
 	MAKEFLAGS += -j$(NPROCS)
-endif
 # macOSX
-ifeq ($(UNAME), Darwin)
+else ifeq ($(UNAME), Darwin)
 	NPROCS = $(shell sysctl hw.ncpu  | grep -o '[0-9]\+')
 	MAKEFLAGS += -j$(NPROCS)
 endif
