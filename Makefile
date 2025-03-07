@@ -5,7 +5,7 @@ TARGET ?= demo
 
 OPTIONS ?=
 
-TARGET_MCU_FAMILY ?= STM32F4
+TARGET_MCU_FAMILY ?= STM32F1
 
 DEBUG = -g3
 
@@ -22,7 +22,7 @@ SRC_DIR      := $(ROOT)/src
 MAKE_DIR	 := $(ROOT)/mk
 
 # ----------------------------------------------
-# Cross Compiler or Native Build
+# Cross Compiler
 # Folder structure
 
 TOOLCHAIN_ROOT ?=
@@ -44,8 +44,6 @@ INC_DIRS = $(SRC_DIR) \
 		$(MODULE_DIR)/libopencm3/include
 
 VPATH = $(SRC_DIR)
-
-LDSCRIPT = $(SRC_DIR)/linkerscript.ld
 
 # ----------------------------------------------
 # Includes
@@ -74,6 +72,8 @@ ASFLAGS = $(ARCH_FLAGS) \
 
 LIBDIR		= -L$(MODULE_DIR)/libopencm3/lib
 
+LDSCRIPT = $(SRC_DIR)/linkerscript.ld
+
 LDFLAGS		= --static \
 			-nostartfiles \
 			-T$(LDSCRIPT) \
@@ -83,15 +83,10 @@ LDFLAGS		= --static \
  			-Wl,--gc-sections \
 			-Wl,--print-memory-usage
 
-$(info $(LDFLAGS))
-$(info $(CFLAGS))
-$(info $(ASFLAGS))
-
 # ----------------------------------------------
 # OpenOCD Flags
 
 OCDINTER  = -f interface/stlink-v2.cfg
-OCDTARGET = -f target/stm32f4x.cfg
 
 OCDFLAGS	= $(OCDINTER) $(OCDTARGET)
 

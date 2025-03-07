@@ -1,20 +1,44 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "openocd",
+      "cwd": "${workspaceRoot}",
+      "executable": "./build/demo.elf",
+      "name": "STM32 OpenOCD",
+      "runToMain": true,
+    //   "preLaunchTask": "build",
+      "preLaunchCommands": [],
+      "postLaunchCommands": [],
+      "device": "STM32F103xB",
+      "svdFile": "STM32F103.svd",
+      "configFiles": [
+        "interface/stlink-v2.cfg",
+        "target/stm32f1x.cfg"
+      ],
+      "showDevDebugOutput": false,
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "cwd": "/home/zami/albatros/src",
+      "program": "/home/zami/albatros/src/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
         {
-            "name": "ST-Link: Debug Application",
-            "cwd": "${workspaceFolder}/build",
-            "executable": "./demo.elf",
-            "servertype": "openocd",
-            "request": "launch",
-            "type": "cortex-debug",
-            "device": "STM32F441RE",
-            "runToEntryPoint": "main",
-            "interface": "swd",
-            // "preLaunchTask": "Build"
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
         }
-    ]
+      ]
+    }
+  ]
 }
